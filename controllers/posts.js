@@ -11,7 +11,7 @@ export const getPosts = async (req, res) => {
    
     try {
 
-        const LIMIT=10;
+        const LIMIT=8;
 
         const startIndex=(Number(page)-1)*LIMIT; //starting index of the particular page. if page no is 2 then startindex is 9-1=8 bcz of index starts with 0
         
@@ -31,6 +31,7 @@ export const getPostsBySearch = async (req, res) => {
     try {
         const title = new RegExp(searchQuery, "i");
 
+        
         const posts = await PostMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
 
         res.json({ data: posts });
